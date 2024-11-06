@@ -154,7 +154,7 @@ app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
 });
 
-// const express = require('express');
+
 // const morgan = require('morgan');
 // const mongoose = require('mongoose');
 // const Blog = require('./models/blog');
