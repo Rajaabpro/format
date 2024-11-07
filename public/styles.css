@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 header{
-  background-color: bisque;
+  background-color: rgb(16, 226, 16);
   color: black;
   padding: 20px;
   text-align: center;
@@ -17,7 +17,7 @@ p, h1, h2, h3, a, ul{
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: #222;
+  color: #940303;
 }
 /* nav & footer styles */
 nav{
@@ -25,7 +25,7 @@ nav{
   justify-content: space-between;
   margin-bottom: 60px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #000000;
   text-transform: uppercase;
 }
 nav ul{
@@ -41,11 +41,11 @@ nav h1{
   font-size: 3em;
 }
 nav p, nav a{
-  color: #777;
+  color: #5104f7;
   font-weight: 300;
 }
 footer{
-  color: #777;
+  color: #000000;
   text-align: center;
   margin: 80px auto 20px;
 }
