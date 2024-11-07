@@ -3,10 +3,13 @@ const morgan = require("morgan");
 const mongoose = require("mongoose");
 const Blog = require("./models/blog");
 const path = require("path");
+const { render } = require("ejs");
+const { title } = require("process");
 const app = express();
 
 // MongoDB connection URI
-const dbURI = "mongodb+srv://rajaabpro:test123@cluster0.a8mneoq.mongodb.net/node-tuts?retryWrites=true&w=majority&appName=Cluster0";
+const dbURI =
+  "mongodb+srv://rajaabpro:test123@cluster0.a8mneoq.mongodb.net/node-tuts?retryWrites=true&w=majority&appName=Cluster0";
 
 // Connect to MongoDB & listen for requests
 mongoose
@@ -54,11 +57,22 @@ app.get("/blogs", (req, res) => {
       console.log(err);
     });
 });
+app.get("/blogs/:id", (req, res) => {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then((result) => {
+      res.render("details", { title: "Blog Details", blog: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 app.post("/blogs", (req, res) => {
   const blog = new Blog(req.body);
 
-  blog.save()
+  blog
+    .save()
     .then((result) => {
       res.redirect("/blogs");
     })
@@ -110,7 +124,6 @@ app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
 });
 
-
 // Mongoose & MongoDB tests
 app.get("/add-blog", (req, res) => {
   const blog = new Blog({
@@ -153,7 +166,6 @@ app.get("/single-blog", (req, res) => {
 app.use((req, res) => {
   res.status(404).render("404", { title: "404" });
 });
-
 
 // const morgan = require('morgan');
 // const mongoose = require('mongoose');
