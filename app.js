@@ -1,15 +1,12 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const Blog = require("./models/blog");
 const path = require("path");
-const { render } = require("ejs");
-const { title } = require("process");
+const blogRoutes = require('./routes/blogRoutes'); // Import blog routes
 const app = express();
 
 // MongoDB connection URI
-const dbURI =
-  "mongodb+srv://rajaabpro:test123@cluster0.a8mneoq.mongodb.net/node-tuts?retryWrites=true&w=majority&appName=Cluster0";
+const dbURI = "mongodb+srv://rajaabpro:test123@cluster0.a8mneoq.mongodb.net/node-tuts?retryWrites=true&w=majority&appName=Cluster0";
 
 // Connect to MongoDB & listen for requests
 mongoose
@@ -42,86 +39,8 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
 
-// Mongoose & MongoDB tests
-app.get("/add-blog", (req, res) => {
-  const blog = new Blog({
-    title: "new blog",
-    snippet: "about my new blog",
-    body: "more about my new blog",
-  });
-
-  blog
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.get("/all-blogs", (req, res) => {
-  Blog.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.get("/single-blog", (req, res) => {
-  Blog.findById("6728ec954e98dd98d2e02489")
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-// 404 page
-app.use((req, res) => {
-  res.status(404).render("404", { title: "404" });
-});
-
-// Mongoose & MongoDB tests
-app.get("/add-blog", (req, res) => {
-  const blog = new Blog({
-    title: "new blog",
-    snippet: "about my new blog",
-    body: "more about my new blog",
-  });
-
-  blog
-    .save()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.get("/all-blogs", (req, res) => {
-  Blog.find()
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
-
-app.get("/single-blog", (req, res) => {
-  Blog.findById("6728ec954e98dd98d2e02489")
-    .then((result) => {
-      res.send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+// Blog Routes
+app.use('/blogs', blogRoutes);
 
 // 404 page
 app.use((req, res) => {
