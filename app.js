@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const path = require("path");
-const blogRoutes = require('./routes/blogRoutes'); // Import blog routes
+const blogRoutes = require('./routes/blogRoutes');
 const app = express();
 
 // MongoDB connection URI
